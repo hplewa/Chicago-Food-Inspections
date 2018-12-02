@@ -1,5 +1,3 @@
 % setup data
-D_tr = readtable('Food_Inspections.xls');
-
-% Group by restaurant - if any failed, label is failed
-% id, lat, lon, failed
+% DBA name, Result (0 Pass, 1 Fail), Latitude, Longitude, Location (Lat, Lon)
+D = readtable('Food_Inspections_Grouped.xls');
