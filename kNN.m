@@ -17,7 +17,7 @@ n_X12 = size(X12, 1);
 decision = zeros(n_X12, 1);
 
 % apply knn on noised dataset
-k = 3;
+k = 9;
 decision = knn_predict(X12, X_train, y_train, k);
 
 % plot decisions in the grid
@@ -37,14 +37,13 @@ scatter(X_train(y_train == 0, 1), X_train(y_train == 0, 2), 10, 'g');
 hold off;
 
 % training error (LOOCV)
-error = loocv(X_train, y_train);
+error = loocv(X_train, y_train, k);
 fprintf('the training error is %.2f\n', error);
 
 % Leave-one-out cross validation
-function error = loocv(X_train, y_train)
+function error = loocv(X_train, y_train, k)
     n = size(X_train, 1);
     errors = zeros(n, 1);
-    k = 1;
     for i = 1:n
         ypred = knn_predict(X_train(i, :), X_train(1:end ~= i, :), y_train(1:end ~= i), k);
         errors(i) = (ypred ~= y_train(i));
